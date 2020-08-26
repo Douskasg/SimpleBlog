@@ -11,6 +11,10 @@ namespace SimpleBlog.Models
 {
     public class User
     {
+        public static void FakeHash()
+        {
+            BCrypt.Net.BCrypt.HashPassword("", 13);
+        }
         public virtual int Id { get; set; }
         public virtual string Username { get; set; }
         public virtual string Email { get; set; }

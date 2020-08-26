@@ -27,6 +27,10 @@ namespace SimpleBlog.Controllers
         {
           
             var user = Database.Session.Query<User>().FirstOrDefault(u => u.Username == form.Username);
+
+            if (user == null)
+                SimpleBlog.Models.User.FakeHash();
+
             if (user == null || !user.CheckPassword(form.Password))
                 ModelState.AddModelError("Username", "Username or Password is incorrect");
 
