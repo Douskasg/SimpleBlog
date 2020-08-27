@@ -7,6 +7,7 @@ using System.Linq;
 using System.ServiceModel.Security;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace SimpleBlog.Areas.Admin.Controllers
 {
@@ -27,6 +28,12 @@ namespace SimpleBlog.Areas.Admin.Controllers
         {
             return View(new Usersnew
             {
+                Roles = Database.Session.Query<Role>().Select(role => new RoleCheckBox
+                {
+                    Id = role.Id,
+                    IsChecked = false,
+                    Name = role.Name
+                }).ToList()
             });
         }
         [HttpPost, ValidateAntiForgeryToken]
@@ -136,6 +143,20 @@ namespace SimpleBlog.Areas.Admin.Controllers
             Database.Session.Transaction.Commit();
 
             return RedirectToAction("index");
+        }
+
+        private void SyncRoles(List<RoleCheckBox> checkboxes, IList<Role> roles)
+        {
+            var selectedRoles = new List<Role>();
+            
+            foreach (var role in Database.Session.Query<Role>())
+            {
+                var checkbox = checkboxes.Single(c => c.Id == role.Id);
+                checkbox.Name = role.Name;
+
+                if (checkbox.IsChecked)
+                    selectedRoles.Add(role);
+            }
         }
     }
 
