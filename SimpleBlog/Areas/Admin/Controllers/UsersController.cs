@@ -76,7 +76,6 @@ namespace SimpleBlog.Areas.Admin.Controllers
         [Obsolete]
         public ActionResult Edit(int id, UsersEdit form)
         {
-            Database.Session.Transaction.Begin();
 
             var user = Database.Session.Load<User>(id);
             if (user == null)
@@ -91,8 +90,7 @@ namespace SimpleBlog.Areas.Admin.Controllers
             user.Username = form.Username;
             user.Email = form.Email;
 
-            Database.Session.SaveOrUpdate(user);
-            Database.Session.Transaction.Commit();
+            Database.Session.Update(user);
             return RedirectToAction("index");
 
         }
@@ -112,7 +110,6 @@ namespace SimpleBlog.Areas.Admin.Controllers
         [Obsolete]
         public ActionResult ResetPassword(int id, UsersRessetPassword form)
         {
-            Database.Session.Transaction.Begin();
 
             var user = Database.Session.Load<User>(id);
             if (user == null)
@@ -125,22 +122,19 @@ namespace SimpleBlog.Areas.Admin.Controllers
 
             user.SetPassword(form.Password);
 
-            Database.Session.SaveOrUpdate(user);
-            Database.Session.Transaction.Commit();
+            Database.Session.Update(user);
             return RedirectToAction("index");
         }
         [HttpPost, ValidateAntiForgeryToken]
         [Obsolete]
         public  ActionResult Delete(int id)
         {
-            Database.Session.Transaction.Begin();
 
             var user = Database.Session.Load<User>(id);
             if (user == null)
                 return HttpNotFound();
 
             Database.Session.Delete(user);
-            Database.Session.Transaction.Commit();
 
             return RedirectToAction("index");
         }
@@ -157,6 +151,12 @@ namespace SimpleBlog.Areas.Admin.Controllers
                 if (checkbox.IsChecked)
                     selectedRoles.Add(role);
             }
+
+            foreach (var toAdd in selectedRoles.Where(t => !roles.Contains(t)))
+                roles.Add(toAdd);
+
+            foreach (var toRemove in roles.Where(t => !selectedRoles.Contains(t)).ToList())
+                roles.Remove(toRemove);
         }
     }
 
