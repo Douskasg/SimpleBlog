@@ -21,23 +21,7 @@
         @Html.PasswordFor(f => f.Password, new { @class = "form-control"})
     </div>
 
-    <div class="panel panel-default">
-        <div class=" panel-heading">Roles</div>
-        <div class="panel-body">
-            <ul class="list-group">
-                @for (var i = 0; i < Model.Roles.Count; i++)
-                {
-                    <li class="list-group-item">
-                        @Html.Hidden("Roles[" +i + "].Id", Model.Roles[i].Id)
-                        <label for=" Roles_@(i)_IsChecked">
-                            @Html.CheckBox("Roles[" + i + "].IsChecked", Model.Roles[i].IsChecked)
-                            @Model.Roles[i].Name
-                        </label>
-                    </li>
-                }
-            </ul>
-        </div>
-    </div>
+    @Html.Partial("_RoleEditor", Model.Roles)
 
 <input type="submit" value="Create User" class="btn btn-primary"/>
 <a href="@Url.Action("index")">or Cancel</a> 
