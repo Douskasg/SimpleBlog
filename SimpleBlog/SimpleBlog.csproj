@@ -225,6 +225,7 @@
     <Content Include="Areas\Admin\Views\Users\ResetPassword.cshtml" />
     <Content Include="Content\Fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Areas\Admin\Views\Users\_RoleEditor.cshtml" />
+    <Content Include="Areas\Admin\Views\Posts\Form.cshtml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
