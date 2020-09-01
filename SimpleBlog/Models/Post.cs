@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using NHibernate.Mapping.ByCode;
+using Org.BouncyCastle.Asn1.X509.Qualified;
 
 namespace SimpleBlog.Models
 {

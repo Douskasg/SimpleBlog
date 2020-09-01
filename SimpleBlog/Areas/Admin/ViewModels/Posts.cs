@@ -15,7 +15,7 @@ namespace SimpleBlog.Areas.Admin.ViewModels
     public class PostsForm
     {
         public bool IsNew { get; set; }
-        public int PostId { get; set; }
+        public int? PostId { get; set; }
 
         [Required, MaxLength(128)]
         public string Title { get; set; }
