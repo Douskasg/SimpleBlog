@@ -6,35 +6,38 @@
 <!DOCTYPE html>
 
 <html>
-<head>
-    <title>@ViewBag.Title - SimpleBlog</title>
-    @Styles.Render("~/styles")
-</head>
-<body>
-  <header>
-      <h1>
-        <a href="@Url.RouteUrl("home")">Simple Blog</a>
-      </h1>
-      @if (User.Identity.IsAuthenticated)
-      {
-          <p>Welcome Back, @User.Identity.Name</p>
-          <a href="@Url.RouteUrl("logout")">Logout</a>
+    <head>
+        <meta charset="utf-8"/>
+        <title>@ViewBag.Title - SimpleBlog</title>
+        @Styles.Render("~/styles")
+    </head>
+    <body>
+        <div class="site-header">
+            <header class="container">
+                <h1 class="page-header">
+                    <a href="@Url.RouteUrl("Home")">Awesome Stuff!</a>
+                    <small>a simple blog powered by ASP.net MVC</small>
+                </h1>
+            </header>
+        </div>
 
-          if (User.IsInRole("admin"))
-          {
-              <a href="@Url.Action("index", "Posts", new {area="admin"})">View posts in admin area</a>
-          }
-      }else
-      {
-      <a href="@Url.RouteUrl("login")">Login</a>
-      }
-  </header>
+        <div class="container">
+           <div class="row">
+                <div class="col-lg-8">
+                    @RenderBody()
+                </div>
+                <div class="col-lg-4 sidebar">
+                    @Html.Action("Sidebar", "Layout")
+                </div>
+            </div>
+            <footer>
+                &copy; @DateTime.UtcNow.Year
+            </footer>
+        </div>
 
-    @RenderBody()
-
-    <footer>
-        &copy; @DateTime.UtcNow.Year - Me
-    </footer>
-    @Scripts.Render("~/scripts")
+    
+    
+        @Scripts.Render("~/scripts")
+        @RenderSection("Scripts", false)
 </body>
 </html>

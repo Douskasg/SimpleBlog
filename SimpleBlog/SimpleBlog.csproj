@@ -599,6 +599,8 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\PostsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
+    <Compile Include="Controllers\LayoutController.cs" />
+    <Compile Include="ViewModels\Layout.cs" />
     <Compile Include="ViewModels\Posts.cs" />
     <Content Include="Areas\Admin\Scripts\PostEditor.js" />
     <Compile Include="Areas\Admin\ViewModels\Posts.cs" />
@@ -651,6 +653,7 @@
     <Content Include="Views\Posts\_Post.cshtml" />
     <Content Include="Views\Posts\Show.cshtml" />
     <Content Include="Views\Posts\Tag.cshtml" />
+    <Content Include="Views\Layout\Sidebar.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
